@@ -30,15 +30,19 @@
         <div class="container">
             <div id="todos">
                 <!-- Tantos todos como elementos hay en el estado-->
-                <div v-for="todo in todos" :key="todo.id">
-                    <label :id="todo.id" class="list-item" @dblclick="toggleCompleted(todo.id)"
-                        :class="{'list-item__hide': mustHideTask(todo.done, todo.text)}">
-                        <div class="list-item__container">
-                            <span :class="{ 'list-item__done': todo.done}">{{ todo.text }}</span>
-                        </div>
-                        <span @click="removeItem(todo.id)" class="button button-text">Remove</span>
-                    </label>
+                <div v-if="todos.length >= 1">
+                    <div v-for="todo in todos" :key="todo.id">
+                        <label :id="todo.id" class="list-item" @dblclick="toggleCompleted(todo.id)"
+                            :class="{'list-item__hide': mustHideTask(todo.done, todo.text)}">
+                            <div class="list-item__container">
+                                <span :class="{ 'list-item__done': todo.done}">{{ todo.text }}</span>
+                            </div>
+                            <span @click="removeItem(todo.id)" class="button button-text">Remove</span>
+                        </label>
+                    </div>
                 </div>
+                <div v-else style="margin-top:10px; margin-bottom:10px; font-weight: 700; font-size: 20px;">There are currently no tasks. Why don't you add one?</div>
+                
             </div>
             <form @submit.prevent="addTodo" id="todo-form">
                 <input v-model="addTaskName" type="text" class="input" placeholder="New Todo" name="addTodo">

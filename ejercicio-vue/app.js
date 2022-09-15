@@ -18,7 +18,7 @@ Vue.createApp({
 
             this.todos.push({
                 id,
-                text: this.addTaskName,
+                text: this.addTaskName.toUpperCase(),
                 done: false
             });
 
@@ -28,7 +28,7 @@ Vue.createApp({
 
         removeItem(id) {
             console.log(id);
-            this.todos = this.todos; // apartado 3
+            this.todos = this.todos.filter(todo => todo.id != id); // apartado 3
         },
 
         toggleCompleted(id) {
